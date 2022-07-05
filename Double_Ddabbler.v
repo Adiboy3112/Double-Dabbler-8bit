@@ -37,7 +37,9 @@ module double_dabbler(d100,d10,d1,bcd,bin,clk);
       
                  en<=1;
                   repeat (1) @ (posedge clk)cout<=bin[7-i];
-                  repeat (1) @ (posedge clk)adda<=1;
+                 
+                  repeat (1) @ (posedge clk)adda<=!(i[0]&i[1]&i[2]);
+              
                 en<=0;
 
 
@@ -74,11 +76,11 @@ module tb_bin2bcd;
   initial begin
       bin <= 0;
       clk <= 0;
-      $monitor ("bin=%b bcd=%b,clk=%b,d100=%b,d10=%b,d1=%b",bin, bcd, clk,d100,d10,d1);
+      $monitor ("bin=%b bcd=%b,d100=%b,d10=%b,d1=%b",bin, bcd,d100,d10,d1);
 
     // Use a for loop to apply random values to the input
       // for (i = 0; i < 5; i = i+1) begin
-         #10 bin<=243;
+         #10 bin<=193;
          #200 $finish;
        
 

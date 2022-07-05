@@ -17,7 +17,14 @@ RCA_4bit RA2(out[7:4], adder,1'b0, sum2, cout2);
                 out <= {out[6:0], d};
             
         end
-                if (adda&&out[3:0]>4) begin
+               if (adda&&out[3:0]>4&&out[7:4]>4) begin
+                  adder<=4'b0011;
+                  #5;
+                  out[3:0]<=sum1;
+                  out[7:4]<=sum2;
+                  adder<=4'b0000;
+               end
+                else if (adda&&out[3:0]>4) begin
                  /* code */
                   adder<=4'b0011;
                   #5;
@@ -25,10 +32,11 @@ RCA_4bit RA2(out[7:4], adder,1'b0, sum2, cout2);
                   adder<=4'b0000;
 
                 end
-                 if (adda&&out[7:4]>4) begin
+                 else if (adda&&out[7:4]>4) begin
                  
                   adder<=4'b0011;
                   #5;
+   
                   out[7:4]<=sum2;
                   adder<=4'b0000;
                  end
