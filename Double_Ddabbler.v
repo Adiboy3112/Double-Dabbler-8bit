@@ -13,10 +13,10 @@ module double_dabbler(d100,d10,d1,bcd,bin,clk);
   wire [7:0] reg1,reg2;
   output [3:0] d100,d10,d1;
   wire [3:0] extra;
+  wire cout1,cout2;
 
   shift_register SR1(cout,clk,en,rst,adda,reg1,cout1);
   shift_register SR2(cout1,clk,en,rst,adda,reg2,cout2);
-  wire cout1,cout2;
   mux20x4 m1(bcd[3:0],reg1,1'b0);
   mux20x4 m2(bcd[7:4],reg1,1'b1);
   mux20x4 m3(bcd[11:8],reg2,1'b0);  
